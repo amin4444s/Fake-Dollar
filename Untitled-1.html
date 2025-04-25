@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>نرخ دلار</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(to bottom right, #c2f0c2, #a0e0ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      direction: rtl;
+    }
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      text-align: center;
+      min-width: 250px;
+    }
+    .price {
+      font-size: 3rem;
+      margin: 1rem 0;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>نرخ دلار</h1>
+    <div class="price" id="price">...</div>
+  </div>
+
+  <script>
+    let price;
+    const storedPrice = localStorage.getItem('fakeDollarPrice');
+    price = storedPrice ? parseFloat(storedPrice) : 10000;
+
+    const priceEl = document.getElementById('price');
+    priceEl.textContent = price.toFixed(2);
+
+    function updatePrice() {
+      const change = (Math.random() - 0.5) * 1000;
+      price = Math.max(0, price + change);
+      priceEl.textContent = price.toFixed(2);
+      localStorage.setItem('fakeDollarPrice', price.toFixed(2));
+    }
+
+    setInterval(updatePrice, 2000);
+  </script>
+</body>
+</html>
